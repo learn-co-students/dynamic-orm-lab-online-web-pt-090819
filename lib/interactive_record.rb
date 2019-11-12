@@ -24,7 +24,17 @@ class InteractiveRecord
     end
 
     def table_name_for_insert
-        
+        self.class.table_name
+    end
+
+    def col_names_for_insert
+        self.class.column_names.delete_if{|col| col == "id"}.join(", ")
+    end
+
+    def values_for_insert
+        values = []
+        self.class.column_names.each{|col| values << "'#{send(col)}'" unless send(col).nil?}
+        values.join(", ")
     end
 
 end
