@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
@@ -18,8 +19,12 @@ class InteractiveRecord
         column_names.compact
     end
 
-    def initialize(options={})
-        options.each{|p, v| self.send("#{p}=", v)}
+    def initialize(attributes={})
+        attributes.each{|property, value| self.send("#{property}=", value)}
+    end
+
+    def table_name_for_insert
+        
     end
 
 end
